@@ -1,0 +1,41 @@
+version: "3.7"
+
+volumes:
+  db:
+
+services:
+  db-test: &db-test
+    image: postgres
+    restart: always
+    ports:
+      - 5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust # allow empty password
+      POSTGRES_USER: api
+      POSTGRES_PASSWORD: ""
+      POSTGRES_DB: api
+
+  db:
+    <<: *db-test
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  api:
+    depends_on: [db]
+    build:
+      context: .
+      dockerfile: docker/live.dockerfile
+    restart: always
+    command: tail -f /dev/null # wait for docker-compose exec commands
+    ports:
+      - 127.0.0.1::3000
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgresql://api@db/api
+      TYPEORM_CONNECTION: postgres
+      TYPEORM_URL: postgresql://api@db/api
+      TYPEORM_ENTITIES: server/models/**/*.ts
+      TYPEORM_MIGRATIONS: server/migrations/**/*.ts
+      TYPEORM_MIGRATIONS_DIR: server/migrations
+    volumes:
+      - .:/usr/src/app
