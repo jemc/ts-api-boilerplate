@@ -8,9 +8,6 @@
     "url": "git@github.com:jemc/ts-api-boilerplate.git"
   },
   "main": "server/index.ts",
-  "engines": {
-    "node": ">=8.15.0"
-  },
   "scripts": {
     "docker": "docker-compose up -d api && docker-compose exec api yarn run",
     "docker:url": "echo http://$(docker-compose port api 3000)",
