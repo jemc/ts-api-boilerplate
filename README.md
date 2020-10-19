@@ -49,3 +49,8 @@ As the CI suite will fail for any wrongly formatted code, it's recommended to co
 ```sh
 yarn prettier:write
 ```
+
+You'll also want to make sure your code has no unaddressed `eslint` issues:
+```sh
+yarn eslint
+```

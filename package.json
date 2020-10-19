@@ -11,8 +11,9 @@
     "docker": "docker-compose up -d api && docker-compose exec api yarn run",
     "docker:url": "echo http://$(docker-compose port api 3000)",
     "start": "ts-node --files server/index.ts",
-    "prettier:check": "prettier --check '**/*.{ts,tsx,jsx}'",
-    "prettier:write": "prettier --write '**/*.{ts,tsx,jsx}'",
+    "prettier:check": "prettier --check 'server/**/*.ts'",
+    "prettier:write": "prettier --write 'server/**/*.ts'",
+    "eslint": "eslint 'server/**/*.ts'",
     "typeorm": "node -r ts-node/register ./node_modules/typeorm/cli.js",
     "db:migration:generate": "yarn run typeorm migration:generate --pretty",
     "db:migration:run": "yarn run typeorm migration:run",
@@ -22,7 +23,7 @@
     "test:db": "docker-compose up -d db-test",
     "test": "yarn run test:db && env DATABASE_URL=postgresql://api@$(docker-compose port db-test 5432)/api jest",
     "test:watch": "yarn run test:db && env DATABASE_URL=postgresql://api@$(docker-compose port db-test 5432)/api jest --watch",
-    "ci": "yarn run prettier:check && tsc --noEmit && yarn run test && yarn audit"
+    "ci": "yarn run prettier:check && tsc --noEmit && yarn run test && yarn run eslint && yarn audit"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -44,6 +45,9 @@
     "@types/jest": "^26.0.14",
     "@types/morgan": "^1.9.1",
     "@types/supertest": "^2.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "eslint": "^7.11.0",
     "jest": "^26.5.3",
     "prettier": "^2.1.2",
     "supertest": "^5.0.0",
@@ -54,6 +58,23 @@
   "prettier": {
     "semi": false,
     "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-extra-semi": "off"
+    }
   },
   "jest": {
     "preset": "ts-jest",

@@ -3,7 +3,7 @@ import setupApp from "./setupApp"
 const PORT = parseInt(process.env.PORT || "8000")
 
 ;(async () => {
-  const { app, database } = await setupApp()
+  const { app } = await setupApp()
   const server = app.listen(PORT, () =>
     console.info("Listening on address", server.address()),
   )
@@ -25,7 +25,7 @@ const PORT = parseInt(process.env.PORT || "8000")
     exit(1)
   })
 
-  process.on("unhandledRejection", (reason: {} | null | undefined) => {
+  process.on("unhandledRejection", (reason: unknown | null | undefined) => {
     console.error("Unhandled Rejection at promise", reason)
     exit(2)
   })
