@@ -3,7 +3,7 @@ import Thing from "../models/Thing"
 import SpecHelper from "../SpecHelper.helper"
 
 describe("ThingsAPI", () => {
-  const baseUrl = `/api/v1/things`
+  const baseUrl = "/api/v1/things"
 
   const helper = new SpecHelper()
   beforeAll(() => helper.setup())

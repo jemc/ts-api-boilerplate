@@ -15,6 +15,7 @@ import ServicesMiddleware from "./middleware/ServicesMiddleware"
 import { defaultServices } from "./Services"
 
 // API & Models
+import { mountStatusAPI } from "./routes/StatusAPI"
 import { mountThingsAPI } from "./routes/ThingsAPI"
 import Thing from "./models/Thing"
 const ALL_MODELS = [Thing]
@@ -47,6 +48,7 @@ function setupErrorLogMiddleware(app: Express) {
 }
 
 function setupMountedAPIs(app: Express) {
+  mountStatusAPI(app)
   mountThingsAPI(app)
 }
 
