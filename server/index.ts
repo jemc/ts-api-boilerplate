@@ -4,8 +4,9 @@ const PORT = parseInt(process.env.PORT || "8000")
 
 ;(async () => {
   const { app, database } = await setupApp()
-  const server = app.listen(PORT, () => console.info("Startup complete"))
-  console.info("Listening on address", server.address())
+  const server = app.listen(PORT, () =>
+    console.info("Listening on address", server.address()),
+  )
 
   const exit = (exitCode: number) => {
     server.close((err) => {
