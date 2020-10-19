@@ -1,8 +1,7 @@
 {
   "name": "ts-api-boilerplate",
-  "version": "0.0.1",
+  "private": true,
   "description": "Boilerplate for developing an HTTP API in Node.js with TypeScript, Express.js, and TypeORM.",
-  "license": "UNLICENSED",
   "repository": {
     "type": "git",
     "url": "git@github.com:jemc/ts-api-boilerplate.git"
