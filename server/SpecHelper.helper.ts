@@ -18,4 +18,10 @@ export default class SpecHelper {
       helper.services = defaultServices(helper.database)
     })(this)
   }
+
+  public teardown() {
+    return (async (helper) => {
+      await helper.database.close()
+    })(this)
+  }
 }

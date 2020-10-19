@@ -24,8 +24,8 @@
     "db:setup": "yarn run db:migration:run",
     "db": "docker-compose up -d db",
     "test:db": "docker-compose up -d db-test",
-    "test": "yarn run test:db && env DATABASE_URL=postgresql://api@$(docker-compose port db-test 5432)/api jest --runInBand",
-    "test:watch": "yarn run test:db && env DATABASE_URL=postgresql://api@$(docker-compose port db-test 5432)/api jest --watch --runInBand",
+    "test": "yarn run test:db && env DATABASE_URL=postgresql://api@$(docker-compose port db-test 5432)/api jest",
+    "test:watch": "yarn run test:db && env DATABASE_URL=postgresql://api@$(docker-compose port db-test 5432)/api jest --watch",
     "ci": "yarn run prettier:check && tsc --noEmit && yarn run test && yarn audit"
   },
   "dependencies": {

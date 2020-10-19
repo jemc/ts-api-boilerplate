@@ -7,6 +7,7 @@ describe("ThingsAPI", () => {
 
   const helper = new SpecHelper()
   beforeAll(() => helper.setup())
+  afterAll(() => helper.teardown())
   const things = () => helper.services.things
   const request = () => helper.request
 
